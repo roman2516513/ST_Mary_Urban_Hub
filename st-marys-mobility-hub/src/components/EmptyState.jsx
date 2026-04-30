@@ -1,10 +1,9 @@
-import React from 'react';
-
-export default function EmptyState({ title = 'Nothing here', children }) {
+export default function EmptyState({ title, text }) {
   return (
-    <div className="empty-state text-center py-4">
-      <h3>{title}</h3>
-      {children && <p className="text-muted">{children}</p>}
+    <div className="empty-state text-center p-5 rounded-4">
+      <i className="bi bi-compass display-5 d-block mb-3"></i>
+      <h2 className="h5">{title}</h2>
+      <p className="text-secondary mb-0">{text}</p>
     </div>
   );
 }
