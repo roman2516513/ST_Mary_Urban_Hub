@@ -1,11 +1,10 @@
-import React from 'react';
-
-export default function StatCard({ title, value, icon }) {
+export default function StatCard({ icon, label, value, note }) {
   return (
-    <div className="stat-card">
-      {icon && <span className="stat-icon">{icon}</span>}
-      <h3>{title}</h3>
-      <p>{value}</p>
+    <div className="stat-card h-100">
+      <div className="stat-icon"><i className={`bi ${icon}`}></i></div>
+      <p className="small text-secondary mb-1">{label}</p>
+      <h3 className="h4 mb-1">{value}</h3>
+      {note && <p className="small text-secondary mb-0">{note}</p>}
     </div>
   );
 }
