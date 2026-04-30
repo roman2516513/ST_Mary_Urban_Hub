@@ -1,8 +1,6 @@
-// Carbon footprint calculations
-// Add carbon emission calculation utilities here
+// Carbon footprint calculations / helper utilities
 
 export const calculateCarbonEmissions = (travelMode, distance) => {
-  // Carbon emissions per km by transport mode (in grams of CO2)
   const emissionsFactors = {
     bus: 89,
     tube: 41,

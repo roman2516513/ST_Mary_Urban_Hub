@@ -5,17 +5,17 @@ import LiveStatus from './pages/LiveStatus';
 import Compare from './pages/Compare';
 import Dashboard from './pages/Dashboard';
 import Sustainability from './pages/Sustainability';
-import Guidance from './pages/Guidance';
 import NotFound from './pages/NotFound';
 
 const links = [
   ['/', 'Home'],
   ['/planner', 'Planner'],
-  ['/status', 'Live TfL'],
+  ['/status', 'Live status'],
+  
   ['/compare', 'Compare'],
   ['/dashboard', 'Dashboard'],
   ['/sustainability', 'Sustainability'],
-  ['/guidance', 'Guidance']
+  
 ];
 
 export default function App() {
@@ -48,13 +48,13 @@ export default function App() {
           <Route path="/compare" element={<Compare />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sustainability" element={<Sustainability />} />
-          <Route path="/guidance" element={<Guidance />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
       <footer className="container pb-4 text-center small text-secondary">
-        Student project. Powered by Transport for London open data; not an official TfL service.
+        St Mary's Urban Mobility Hub — Powered by Transport for London open data; not an official TfL service.
       </footer>
     </>
   );
