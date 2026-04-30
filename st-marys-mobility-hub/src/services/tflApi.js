@@ -9,10 +9,17 @@ function withKey(path) {
 
 async function request(path) {
   const response = await fetch(withKey(path));
+  const text = await response.text();
   if (!response.ok) {
-    throw new Error(`TfL request failed: ${response.status}`);
+    let body = text;
+    try { body = JSON.parse(text); } catch {}
+    throw new Error(`TfL request failed: ${response.status} ${response.statusText} - ${typeof body === 'string' ? body : JSON.stringify(body)}`);
   }
-  return response.json();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
 }
 
 export function getLineStatuses() {
@@ -22,7 +29,23 @@ export function getLineStatuses() {
 export function planJourney(from, to) {
   const start = encodeURIComponent(from.trim());
   const end = encodeURIComponent(to.trim());
-  return request(`/Journey/JourneyResults/${start}/to/${end}?journeyPreference=LeastTime&timeIs=Departing`);
+  return (async () => {
+    let startVal = start;
+    let endVal = end;
+    let last;
+    // Try up to a few times to follow disambiguation hints from TfL
+    for (let i = 0; i < 4; i++) {
+      const path = `/Journey/JourneyResults/${startVal}/to/${endVal}?journeyPreference=LeastTime&timeIs=Departing`;
+      last = await request(path);
+      if (last?.journeys) return last;
+      const toOpt = last?.toLocationDisambiguation?.disambiguationOptions?.[0]?.parameterValue;
+      const fromOpt = last?.fromLocationDisambiguation?.disambiguationOptions?.[0]?.parameterValue;
+      if (!toOpt && !fromOpt) break;
+      if (toOpt) endVal = encodeURIComponent(String(toOpt));
+      if (fromOpt) startVal = encodeURIComponent(String(fromOpt));
+    }
+    return last;
+  })();
 }
 
 export function getNearbyStops(lat, lon) {
@@ -31,6 +54,11 @@ export function getNearbyStops(lat, lon) {
 
 export function searchBikePoints(query) {
   return request(`/BikePoint/Search?query=${encodeURIComponent(query.trim())}`);
+}
+
+export function searchPlaces(query) {
+  // Use StopPoint Search which provides station/place matches. Place/Search can return 404.
+  return request(`/StopPoint/Search?query=${encodeURIComponent(query.trim())}`);
 }
 
 export function getBikePoint(id) {
