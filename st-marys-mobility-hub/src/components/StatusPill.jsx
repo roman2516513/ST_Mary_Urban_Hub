@@ -1,6 +1,4 @@
-import React from 'react';
-
 export default function StatusPill({ status }) {
-  const cls = status === 'Good' ? 'badge bg-success' : 'badge bg-secondary';
-  return <span className={cls}>{status}</span>;
+  const isGood = status?.toLowerCase().includes('good');
+  return <span className={`status-pill ${isGood ? 'good' : 'warning'}`}>{status || 'Unknown'}</span>;
 }
