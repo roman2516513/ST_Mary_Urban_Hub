@@ -8,5 +8,17 @@ export function loadFromStorage(key, fallback) {
 }
 
 export function saveToStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.error('saveToStorage error for', key, err);
+  }
+}
+
+export function removeFromStorage(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch (err) {
+    console.error('removeFromStorage error for', key, err);
+  }
 }
