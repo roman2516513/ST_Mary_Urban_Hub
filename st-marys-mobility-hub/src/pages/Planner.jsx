@@ -33,7 +33,7 @@ export default function Planner() {
       setJourneys(data.journeys || []);
       saveToStorage('smuh_last_search', { from, to, searchedAt: new Date().toISOString() });
     } catch (err) {
-      // Show error details if available to help debugging (network/CORS/key issues)
+      
       setMessage(`TfL journey planner error: ${err?.message || 'could not find a route. Use London place names, stations or postcodes.'}`);
     } finally {
       setLoading(false);
@@ -144,7 +144,7 @@ export default function Planner() {
       <div className="row g-4">
         <div className="col-lg-5">
           <section className="surface-card rounded-5 p-4 h-100">
-            <h2 className="h4">Plan a TfL journey</h2>
+            <h2 className="h4">Journey planner (TfL data)</h2>
             <p className="text-secondary small">Try London stations, places or postcodes. Example: Stratford to Waterloo.</p>
             <form onSubmit={handleJourney} className="d-grid gap-3">
               <label className="form-label">From
