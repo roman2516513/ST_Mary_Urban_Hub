@@ -54,7 +54,7 @@ export default function App() {
       </main>
 
       <footer className="container pb-4 text-center small text-secondary">
-        St Mary's Urban Mobility Hub — Powered by Transport for London open data; not an official TfL service.
+        St Mary's Mobility Hub
       </footer>
     </>
   );
