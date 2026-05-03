@@ -1,4 +1,4 @@
-# St Mary's Urban Mobility Hub
+# St Mary's Mobility Hub
 
 A small React + Vite app for exploring and comparing travel options around St Mary's.
 
