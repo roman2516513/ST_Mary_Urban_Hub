@@ -1,16 +1,52 @@
-# React + Vite
+# St Mary's Urban Mobility Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + Vite app for exploring and comparing travel options around St Mary's.
 
-Currently, two official plugins are available:
+## Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Install dependencies and start the dev server:
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Build for production and preview:
 
-## Expanding the ESLint configuration
+```bash
+npm run build
+npm run preview
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Open the local URL shown by Vite.
+
+## Technologies
+
+- React + Vite
+- React Router
+- Bootstrap (minimal) + Bootstrap Icons
+- Recharts
+- TfL Unified API
+- localStorage
+
+## Features
+
+- Home and route discovery
+- Travel-mode comparison and cost estimator
+- Journey planner with live TfL data (line/status/journeys)
+- Saved journeys and simple dashboard
+- Sustainability comparison and basic charts
+
+## TfL API (optional)
+
+Copy `.env.example` to `.env` and set your key:
+
+```bash
+VITE_TFL_APP_KEY=your_key_here
+```
+
+The app works for local development without a key for many endpoints, but a key improves reliability.
+
+## Notes
+
+Do not commit `node_modules`.
