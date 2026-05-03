@@ -47,7 +47,7 @@ export default function App() {
           <Route path="/status" element={<LiveStatus />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          
+          <Route path="/sustainability" element={<Sustainability />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
