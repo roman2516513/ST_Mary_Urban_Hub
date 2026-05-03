@@ -37,16 +37,4 @@ Open the local URL shown by Vite.
 - Saved journeys and simple dashboard
 - Sustainability comparison and basic charts
 
-## TfL API (optional)
 
-Copy `.env.example` to `.env` and set your key:
-
-```bash
-VITE_TFL_APP_KEY=your_key_here
-```
-
-The app works for local development without a key for many endpoints, but a key improves reliability.
-
-## Notes
-
-Do not commit `node_modules`.
