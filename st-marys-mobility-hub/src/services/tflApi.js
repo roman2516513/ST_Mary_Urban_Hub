@@ -17,8 +17,7 @@ async function request(path) {
   if (!response.ok) {
     let body;
     try { body = JSON.parse(text); } catch { body = text; }
-    // TfL uses 300 responses to indicate disambiguation results for journeys.
-    // Return the parsed body for 300 so callers can handle disambiguation.
+    // Allow 300 (disambiguation) responses to be handled by callers
     if (response.status === 300) {
       return body;
     }
@@ -42,7 +41,7 @@ export function planJourney(from, to) {
     let startVal = start;
     let endVal = end;
     let last;
-    // Try up to a few times to follow disambiguation hints from TfL
+    // Follow disambiguation hints up to 4 attempts
     for (let i = 0; i < 4; i++) {
       const path = `/Journey/JourneyResults/${startVal}/to/${endVal}?journeyPreference=LeastTime&timeIs=Departing`;
       last = await request(path);
@@ -66,12 +65,10 @@ export function searchBikePoints(query) {
 }
 
 export async function searchPlaces(query) {
-  // Use StopPoint Search which provides station/place matches. Place/Search can return 404.
+  // Use StopPoint Search; return empty array on error
   try {
     return await request(`/StopPoint/Search?query=${encodeURIComponent(query.trim())}`);
   } catch (err) {
-    // Some TfL search endpoints return 404 or other non-OK responses when no matches
-    // Normalise to an empty array/object so callers don't crash.
     return [];
   }
 }

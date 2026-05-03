@@ -99,7 +99,7 @@ export default function Planner() {
       const raw = await searchPlaces(query);
       const list = raw?.matches || raw?.places || raw?.results || raw || [];
       const normalized = (list || []).map((item) => {
-        // TfL Place/Search returns matches with a `place` object containing `commonName`.
+        // TfL place results may nest a `place` object with `commonName`
         const place = item?.place || item;
         return place?.commonName || place?.name || place?.id || (typeof place === 'string' ? place : null);
       }).filter(Boolean);
